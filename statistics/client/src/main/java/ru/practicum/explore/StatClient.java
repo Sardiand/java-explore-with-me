@@ -19,10 +19,10 @@ import java.util.Map;
 @Service
 public class StatClient {
     protected final RestTemplate rest;
+    private final RestTemplateBuilder builder = new RestTemplateBuilder();
 
     @Autowired
     public StatClient(@Value("${ewm-server.url}") String url) {
-        RestTemplateBuilder builder = new RestTemplateBuilder();
         this.rest = builder
                 .uriTemplateHandler(new DefaultUriBuilderFactory(url))
                 .requestFactory(HttpComponentsClientHttpRequestFactory::new)
