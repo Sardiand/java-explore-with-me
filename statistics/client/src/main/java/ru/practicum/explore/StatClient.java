@@ -19,10 +19,10 @@ import java.util.Map;
 @Service
 public class StatClient {
     protected final RestTemplate rest;
-    private static final RestTemplateBuilder builder = new RestTemplateBuilder();
 
     @Autowired
     public StatClient(@Value("${ewm-server.url}") String url) {
+        RestTemplateBuilder builder = new RestTemplateBuilder();
         this.rest = builder
                 .uriTemplateHandler(new DefaultUriBuilderFactory(url))
                 .requestFactory(HttpComponentsClientHttpRequestFactory::new)
@@ -34,7 +34,7 @@ public class StatClient {
     }
 
     public ResponseEntity<Object> get(LocalDateTime start, LocalDateTime end,
-                                          Boolean unique, List<String> uris) {
+                                      Boolean unique, List<String> uris) {
         Map<String, Object> parameters = Map.of(
                 "start", start.toString().replace("T", " "),
                 "end", end.toString().replace("T", " "),
