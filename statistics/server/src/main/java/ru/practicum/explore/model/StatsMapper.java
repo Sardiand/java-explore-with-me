@@ -10,4 +10,6 @@ public interface StatsMapper {
 
     @Mapping(target = "id", ignore = true)
     EndpointHit toEndpointHit(EndpointHitDto dto);
+
+    OutEndpointHitDto toOutEndpointHitDto(EndpointHit endpointHit);
 }
