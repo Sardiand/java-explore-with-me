@@ -2,7 +2,6 @@ package ru.practicum.explore.admin.user.service;
 
 import ru.practicum.explore.admin.user.dto.InUserDto;
 import ru.practicum.explore.admin.user.dto.OutUserDto;
-import ru.practicum.explore.admin.user.dto.UserDto;
 
 import java.util.List;
 

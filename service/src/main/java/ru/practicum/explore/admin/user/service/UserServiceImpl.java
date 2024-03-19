@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
         }
         List<OutUserDto> outUsers = new ArrayList<>();
         if (!users.isEmpty()) {
-            for(User user : users) {
+            for (User user : users) {
                 outUsers.add(mapper.toOutUserDto(user));
             }
         }
@@ -55,8 +55,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void deleteUser(long userId) {
-        User user = repository.findById(userId).orElseThrow(() ->
-                new NotFoundException(String.format("Пользователь с id %d не найден", userId)));
+        User user = repository.findById(userId).orElseThrow(() -> new NotFoundException(String.format("Пользователь с id %d не найден", userId)));
         repository.deleteById(userId);
     }
 }
