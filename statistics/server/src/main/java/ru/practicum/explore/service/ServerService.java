@@ -1,6 +1,5 @@
 package ru.practicum.explore.service;
 
-import ru.practicum.explore.model.EndpointHit;
 import ru.practicum.explore.model.EndpointHitDto;
 import ru.practicum.explore.model.OutEndpointHitDto;
 import ru.practicum.explore.model.ViewStats;
