@@ -28,9 +28,6 @@ public class ServerServiceImpl implements ServerService {
     @Override
     @Transactional(readOnly = true)
     public List<ViewStats> getHits(LocalDateTime start, LocalDateTime end, Boolean unique, List<String> uris) {
-        if (start.isAfter(end)) {
-            throw new IllegalArgumentException("Invalid date range");
-        }
         if (!unique) {
             if (uris == null || uris.isEmpty()) {
                 return repository.findAllWithoutUriAndNotUniqueIp(start, end);

@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.practicum.explore.exception.DataError;
 import ru.practicum.explore.model.EndpointHitDto;
 import ru.practicum.explore.model.ViewStats;
 import ru.practicum.explore.service.ServerService;
@@ -32,6 +33,9 @@ public class StatsServerController {
                                    @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime end,
                                    @RequestParam(defaultValue = "false") Boolean unique,
                                    @RequestParam(required = false) List<String> uris) {
+        if (start.isAfter(end)) {
+            throw new DataError("Wrong start date/time.");
+        }
         return service.getHits(start, end, unique, uris);
     }
 }
