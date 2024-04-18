@@ -11,6 +11,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class ServerServiceImpl implements ServerService {
 
     private final StatsRepository repository;
@@ -20,12 +21,16 @@ public class ServerServiceImpl implements ServerService {
     @Transactional
     public OutEndpointHitDto saveHit(EndpointHitDto dto) {
         EndpointHit hit = mapper.toEndpointHit(dto);
-        return mapper.toOutEndpointHitDto(repository.save(hit));
+        EndpointHit endpointHit = repository.save(hit);
+        return mapper.toOutEndpointHitDto(endpointHit);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<ViewStats> getHits(LocalDateTime start, LocalDateTime end, Boolean unique, List<String> uris) {
+        if (start.isAfter(end)) {
+            throw new IllegalArgumentException("Invalid date range");
+        }
         if (!unique) {
             if (uris == null || uris.isEmpty()) {
                 return repository.findAllWithoutUriAndNotUniqueIp(start, end);

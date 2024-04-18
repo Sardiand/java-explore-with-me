@@ -14,6 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ru.practicum.explore.model.EndpointHitDto;
 import ru.practicum.explore.model.ViewStats;
 
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +40,7 @@ public class StatClient {
         rest.exchange(serverUrl + "/hit",
                 HttpMethod.POST,
                 requestEntity,
-                Object.class);
+                String.class);
     }
 
     public ResponseEntity<List<ViewStats>> get(LocalDateTime start, LocalDateTime end,
@@ -75,6 +76,7 @@ public class StatClient {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
+        headers.setAcceptCharset(List.of(StandardCharsets.UTF_8));
         return headers;
     }
 }

@@ -10,10 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import ru.practicum.explore.annotation.DateValidation;
 import ru.practicum.explore.privateApi.event.model.Location;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 
 @Getter
@@ -43,6 +40,7 @@ public class InEventDto {
     private Boolean paid = false;
     private Boolean requestModeration = true;
 
+    @Min(0)
     private Integer participantLimit = 0;
     @NotNull
     private Location location;

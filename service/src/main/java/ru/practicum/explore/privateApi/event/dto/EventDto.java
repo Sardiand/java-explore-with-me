@@ -8,6 +8,7 @@ import ru.practicum.explore.admin.user.dto.UserDto;
 import ru.practicum.explore.privateApi.event.model.Location;
 import ru.practicum.explore.privateApi.event.model.State;
 
+import javax.validation.constraints.Min;
 import java.time.LocalDateTime;
 
 @Data
@@ -40,6 +41,7 @@ public class EventDto {
 
     private State state;
 
+    @Min(0)
     private Integer participantLimit;
     private Integer confirmedRequests;
     private Integer views;

@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -17,7 +16,6 @@ public class UpdateInCompilationDto {
     private List<Long> events;
     private Boolean pinned = false;
 
-    @NotBlank
     @Size(min = 1, max = 50)
     private String title;
 }

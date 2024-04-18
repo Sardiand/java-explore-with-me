@@ -176,7 +176,7 @@ public class PublicApiServiceImpl implements PublicApiService {
     }
 
     private EndpointHitDto createEndpointHitDto(String ip, String uri, LocalDateTime timestamp) {
-        String artifact = "explore-with-me-service";
+        String artifact = "service";
         return EndpointHitDto.builder()
                 .ip(ip)
                 .uri(uri)

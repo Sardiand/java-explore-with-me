@@ -13,6 +13,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @Validated
 public class InCategoryDto {
+
     @NotBlank
     @Size(max = 50)
     private String name;
