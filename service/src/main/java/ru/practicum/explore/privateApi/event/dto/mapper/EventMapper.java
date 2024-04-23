@@ -2,13 +2,11 @@ package ru.practicum.explore.privateApi.event.dto.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import ru.practicum.explore.admin.category.dto.OutCategoryDto;
 import ru.practicum.explore.admin.category.model.Category;
 import ru.practicum.explore.admin.user.dto.mapper.UserMapper;
 import ru.practicum.explore.admin.user.model.User;
 import ru.practicum.explore.privateApi.event.dto.EventDto;
 import ru.practicum.explore.privateApi.event.dto.InEventDto;
-import ru.practicum.explore.privateApi.event.dto.LocationDto;
 import ru.practicum.explore.privateApi.event.dto.ShortEventDto;
 import ru.practicum.explore.privateApi.event.model.Event;
 import ru.practicum.explore.privateApi.event.model.Location;
