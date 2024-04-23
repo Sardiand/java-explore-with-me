@@ -1,13 +1,13 @@
 package ru.practicum.explore.privateApi.event.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 
-@Getter
+@Data
 @Entity
 @Table(name = "locations")
 @NoArgsConstructor

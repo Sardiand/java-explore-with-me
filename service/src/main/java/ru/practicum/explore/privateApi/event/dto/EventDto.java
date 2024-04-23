@@ -3,12 +3,11 @@ package ru.practicum.explore.privateApi.event.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
-import ru.practicum.explore.admin.category.model.Category;
+import ru.practicum.explore.admin.category.dto.OutCategoryDto;
 import ru.practicum.explore.admin.user.dto.UserDto;
-import ru.practicum.explore.privateApi.event.model.Location;
 import ru.practicum.explore.privateApi.event.model.State;
 
-import javax.validation.constraints.Min;
+import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalDateTime;
 
 @Data
@@ -41,12 +40,12 @@ public class EventDto {
 
     private State state;
 
-    @Min(0)
+    @PositiveOrZero
     private Integer participantLimit;
     private Integer confirmedRequests;
     private Integer views;
 
     private UserDto initiator;
-    private Category category;
-    private Location location;
+    private OutCategoryDto category;
+    private LocationDto location;
 }

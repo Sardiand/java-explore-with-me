@@ -17,6 +17,7 @@ import ru.practicum.explore.exception.BadRequestException;
 import ru.practicum.explore.exception.NotFoundException;
 import ru.practicum.explore.privateApi.event.dto.EventDto;
 import ru.practicum.explore.privateApi.event.dto.mapper.EventMapper;
+import ru.practicum.explore.privateApi.event.dto.mapper.LocationMapper;
 import ru.practicum.explore.privateApi.event.model.Event;
 import ru.practicum.explore.privateApi.event.model.Location;
 import ru.practicum.explore.privateApi.event.model.State;
@@ -40,6 +41,7 @@ public class AdminEventServiceImpl implements AdminEventService {
     private final CategoryRepository categoryRepository;
     private final LocationRepository locationRepository;
     private final EventMapper mapper;
+    private final LocationMapper locationMapper;
 
     @Override
     @Transactional
@@ -65,7 +67,7 @@ public class AdminEventServiceImpl implements AdminEventService {
             updatedEvent.setCategory(category);
         }
         if (dto.getLocation() != null) {
-            Location location = locationRepository.save(dto.getLocation());
+            Location location = locationRepository.save(locationMapper.toLocation(dto.getLocation()));
             updatedEvent.setLocation(location);
         }
         Event savedEvent = eventRepository.save(updatedEvent);

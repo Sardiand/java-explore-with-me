@@ -17,6 +17,7 @@ import ru.practicum.explore.exception.NotFoundException;
 import ru.practicum.explore.model.ViewStats;
 import ru.practicum.explore.privateApi.event.dto.*;
 import ru.practicum.explore.privateApi.event.dto.mapper.EventMapper;
+import ru.practicum.explore.privateApi.event.dto.mapper.LocationMapper;
 import ru.practicum.explore.privateApi.event.model.Event;
 import ru.practicum.explore.privateApi.event.model.Location;
 import ru.practicum.explore.privateApi.event.model.State;
@@ -52,13 +53,14 @@ public class EventServiceImpl implements EventService {
     private final EventMapper mapper;
     private final RequestMapper requestMapper;
     private final StatClient statClient;
+    private final LocationMapper locationMapper;
 
     @Override
     @Transactional
     public EventDto create(Long userId, InEventDto dto) {
         User user = checkUser(userId);
         Category category = checkCategory(dto.getCategory());
-        Location savedLocation = locationRepository.save(dto.getLocation());
+        Location savedLocation = locationRepository.save(locationMapper.toLocation(dto.getLocation()));
         Event event = mapper.toEvent(dto, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), State.PENDING,
                 user, category, savedLocation);
         event.setViews(0L);
@@ -84,7 +86,7 @@ public class EventServiceImpl implements EventService {
             updatedEvent.setCategory(category);
         }
         if (dto.getLocation() != null) {
-            Location location = locationRepository.save(dto.getLocation());
+            Location location = locationRepository.save(locationMapper.toLocation(dto.getLocation()));
             updatedEvent.setLocation(location);
         }
         updateEventViewsAndConfirmedRequests(event, eventId);

@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 import ru.practicum.explore.annotation.DateValidation;
-import ru.practicum.explore.privateApi.event.model.Location;
 
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
@@ -40,10 +39,10 @@ public class InEventDto {
     private Boolean paid = false;
     private Boolean requestModeration = true;
 
-    @Min(0)
+    @PositiveOrZero
     private Integer participantLimit = 0;
     @NotNull
-    private Location location;
+    private LocationDto location;
     @NotNull
     @Positive
     private Long category;

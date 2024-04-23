@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
-import ru.practicum.explore.privateApi.event.model.Location;
+import ru.practicum.explore.privateApi.event.dto.LocationDto;
 
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
@@ -36,6 +36,6 @@ public class AdminUpdateEventDto {
     private Boolean requestModeration;
     private Integer participantLimit;
     private Long category;
-    private Location location;
+    private LocationDto location;
     private AdminStateAction stateAction;
 }

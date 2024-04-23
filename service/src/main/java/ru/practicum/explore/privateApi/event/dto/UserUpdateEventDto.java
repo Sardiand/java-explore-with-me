@@ -8,9 +8,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 import ru.practicum.explore.annotation.DateValidation;
-import ru.practicum.explore.privateApi.event.model.Location;
 
-import javax.validation.constraints.Min;
+import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
@@ -38,10 +37,10 @@ public class UserUpdateEventDto {
     private Boolean paid;
     private Boolean requestModeration;
 
-    @Min(0)
+    @PositiveOrZero
     private Integer participantLimit;
 
     private Long category;
-    private Location location;
+    private LocationDto location;
     private StateAction stateAction;
 }
