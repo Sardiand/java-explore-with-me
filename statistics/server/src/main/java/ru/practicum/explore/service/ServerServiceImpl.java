@@ -3,17 +3,15 @@ package ru.practicum.explore.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.practicum.explore.model.EndpointHitDto;
+import ru.practicum.explore.model.*;
 import ru.practicum.explore.repository.StatsRepository;
-import ru.practicum.explore.model.ViewStats;
-import ru.practicum.explore.model.StatsMapper;
-import ru.practicum.explore.model.EndpointHit;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class ServerServiceImpl implements ServerService {
 
     private final StatsRepository repository;
@@ -21,9 +19,10 @@ public class ServerServiceImpl implements ServerService {
 
     @Override
     @Transactional
-    public EndpointHit saveHit(EndpointHitDto dto) {
+    public OutEndpointHitDto saveHit(EndpointHitDto dto) {
         EndpointHit hit = mapper.toEndpointHit(dto);
-        return repository.save(hit);
+        EndpointHit endpointHit = repository.save(hit);
+        return mapper.toOutEndpointHitDto(endpointHit);
     }
 
     @Override
