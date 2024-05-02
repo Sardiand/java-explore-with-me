@@ -15,6 +15,7 @@ import ru.practicum.explore.admin.event.dto.AdminUpdateEventDto;
 import ru.practicum.explore.admin.event.parametrs.SearchingParams;
 import ru.practicum.explore.exception.BadRequestException;
 import ru.practicum.explore.exception.NotFoundException;
+import ru.practicum.explore.privateApi.comment.repository.CommentRepository;
 import ru.practicum.explore.privateApi.event.dto.EventDto;
 import ru.practicum.explore.privateApi.event.dto.mapper.EventMapper;
 import ru.practicum.explore.privateApi.event.dto.mapper.LocationMapper;
@@ -40,6 +41,7 @@ public class AdminEventServiceImpl implements AdminEventService {
     private final EventRepository eventRepository;
     private final CategoryRepository categoryRepository;
     private final LocationRepository locationRepository;
+    private final CommentRepository commentRepository;
     private final EventMapper mapper;
     private final LocationMapper locationMapper;
 
@@ -86,6 +88,11 @@ public class AdminEventServiceImpl implements AdminEventService {
                     .collect(Collectors.toList());
         }
         return Collections.emptyList();
+    }
+
+    @Override
+    public void deleteComment(Long commentId) {
+        commentRepository.deleteById(commentId);
     }
 
     private Boolean isDateValid(Event event, AdminUpdateEventDto dto) {

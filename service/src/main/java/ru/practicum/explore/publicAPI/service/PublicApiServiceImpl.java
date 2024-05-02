@@ -21,6 +21,10 @@ import ru.practicum.explore.admin.compilation.repository.CompilationRepository;
 import ru.practicum.explore.exception.NotFoundException;
 import ru.practicum.explore.model.EndpointHitDto;
 import ru.practicum.explore.model.ViewStats;
+import ru.practicum.explore.privateApi.comment.dto.CommentDto;
+import ru.practicum.explore.privateApi.comment.dto.mapper.CommentMapper;
+import ru.practicum.explore.privateApi.comment.model.Comment;
+import ru.practicum.explore.privateApi.comment.repository.CommentRepository;
 import ru.practicum.explore.privateApi.event.dto.EventDto;
 import ru.practicum.explore.privateApi.event.dto.ShortEventDto;
 import ru.practicum.explore.privateApi.event.dto.mapper.EventMapper;
@@ -55,6 +59,8 @@ public class PublicApiServiceImpl implements PublicApiService {
     private final EventMapper eventMapper;
     private final StatClient statClient;
     private final RequestRepository requestRepository;
+    private final CommentRepository commentRepository;
+    private final CommentMapper commentMapper;
 
     @Override
     public CompilationDto getCompById(Long compId) {
@@ -159,6 +165,20 @@ public class PublicApiServiceImpl implements PublicApiService {
                     .collect(Collectors.toList());
         }
         return Collections.emptyList();
+    }
+
+    @Override
+    public List<CommentDto> getComments(Long eventId, int from, int size) {
+        eventRepository.findById(eventId).orElseThrow(() ->
+                new NotFoundException(String.format("Event not found %d", eventId)));
+        Pageable pageable = PageRequest.of(from > 0 ? from / size : 0, size, Sort.by("start").descending());
+        List<Comment> comments = commentRepository.findAllByEventId(eventId, pageable);
+        if (comments.isEmpty()) {
+            return Collections.emptyList();
+        } else {
+            return comments.stream().map(commentMapper::toCommentDto)
+                    .collect(Collectors.toList());
+        }
     }
 
     private void saveStatsForList(HttpServletRequest request, Set<Long> eventIds) {

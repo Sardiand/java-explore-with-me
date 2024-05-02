@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.explore.admin.category.dto.OutCategoryDto;
 import ru.practicum.explore.admin.compilation.dto.CompilationDto;
 import ru.practicum.explore.exception.BadRequestException;
+import ru.practicum.explore.privateApi.comment.dto.CommentDto;
 import ru.practicum.explore.privateApi.event.dto.EventDto;
 import ru.practicum.explore.privateApi.event.dto.ShortEventDto;
 import ru.practicum.explore.publicAPI.event.EventSearchingParams;
@@ -71,5 +72,12 @@ public class PublicApiController {
         EventSearchingParams params = EventSearchingParams.builder().text(text).rangeStart(rangeStart).rangeEnd(rangeEnd)
                 .categories(categories).onlyAvailable(onlyAvailable).sort(sort).paid(paid).build();
         return service.getEvents(params, from, size, httpServletRequest);
+    }
+
+    @GetMapping("/events/{eventId}/comments")
+    public List<CommentDto> getCommentsForEvent(@PathVariable @Positive Long eventId,
+                                                @RequestParam(defaultValue = "0") @PositiveOrZero Integer from,
+                                                @RequestParam(defaultValue = "10") @Positive Integer size) {
+        return service.getComments(eventId, from, size);
     }
 }

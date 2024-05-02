@@ -38,4 +38,9 @@ public class AdminEventController {
         }
         return service.getAll(new SearchingParams(users, states, categories, rangeStart, rangeEnd), from, size);
     }
+
+    @DeleteMapping("/{eventId}/comments/{commentId}")
+    public void delete(@PathVariable Long commentId) {
+        service.deleteComment(commentId);
+    }
 }
