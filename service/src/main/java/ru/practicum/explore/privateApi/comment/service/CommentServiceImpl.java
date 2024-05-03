@@ -5,7 +5,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.explore.admin.user.model.User;
 import ru.practicum.explore.admin.user.repository.UserRepository;
 import ru.practicum.explore.exception.ForbiddenException;
@@ -25,7 +24,6 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
-@Transactional(readOnly = true)
 public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
@@ -42,7 +40,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public CommentDto update(Long userId, Long commentId, InCommentDto dto) {
-        setUser(userId);
+        checkUser(userId);
         Comment comment = setComment(commentId);
         checkPermission(userId, comment);
         comment.setText(dto.getText());
@@ -52,7 +50,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public CommentDto getById(Long userId, Long commentId) {
-        setUser(userId);
+        checkUser(userId);
         Comment comment = setComment(commentId);
         checkPermission(userId, comment);
         return mapper.toCommentDto(comment);
@@ -60,7 +58,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<CommentDto> getAllByUserId(Long userId, int from, int size) {
-        Pageable pageable = PageRequest.of(from > 0 ? from / size : 0, size, Sort.by("start").descending());
+        Pageable pageable = PageRequest.of(from > 0 ? from / size : 0, size, Sort.by("created").descending());
         List<Comment> comments = commentRepository.findAllByAuthorId(userId, pageable);
         if (comments.isEmpty()) {
             return Collections.emptyList();
@@ -72,7 +70,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public void deleteById(Long userId, Long commentId) {
-        setUser(userId);
+        checkUser(userId);
         Comment comment = setComment(commentId);
         checkPermission(userId, comment);
         commentRepository.deleteById(commentId);
@@ -97,6 +95,12 @@ public class CommentServiceImpl implements CommentService {
         if (!userId.equals(comment.getAuthor().getId())) {
             throw new ForbiddenException(String.format("User with id %d isn't author of comment %d",
                     userId, comment.getId()));
+        }
+    }
+
+    private void checkUser(Long userId) {
+        if (userRepository.findById(userId).isEmpty()) {
+            throw new NotFoundException(String.format("User not found %d", userId));
         }
     }
 }

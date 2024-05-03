@@ -11,6 +11,4 @@ public interface AdminEventService {
     EventDto update(Long id, AdminUpdateEventDto dto);
 
     List<EventDto> getAll(SearchingParams params, Integer from, Integer size);
-
-    void deleteComment(Long commentId);
 }

@@ -27,20 +27,15 @@ public class AdminEventController {
 
     @GetMapping
     public List<EventDto> getEvents(@RequestParam(required = false) List<Long> users,
-                                        @RequestParam(required = false) List<State> states,
-                                        @RequestParam(required = false) List<Long> categories,
-                                        @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeStart,
-                                        @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeEnd,
-                                        @RequestParam(defaultValue = "0") Integer from,
-                                        @RequestParam(defaultValue = "10") Integer size) {
+                                    @RequestParam(required = false) List<State> states,
+                                    @RequestParam(required = false) List<Long> categories,
+                                    @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeStart,
+                                    @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeEnd,
+                                    @RequestParam(defaultValue = "0") Integer from,
+                                    @RequestParam(defaultValue = "10") Integer size) {
         if (rangeEnd != null && rangeStart != null && rangeEnd.isBefore(rangeStart)) {
             throw new InvalidParameterException("Date range is invalid");
         }
         return service.getAll(new SearchingParams(users, states, categories, rangeStart, rangeEnd), from, size);
-    }
-
-    @DeleteMapping("/{eventId}/comments/{commentId}")
-    public void delete(@PathVariable Long commentId) {
-        service.deleteComment(commentId);
     }
 }

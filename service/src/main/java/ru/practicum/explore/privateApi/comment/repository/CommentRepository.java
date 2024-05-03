@@ -10,6 +10,4 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     List<Comment> findAllByAuthorId(long authorId, Pageable pageable);
 
     List<Comment> findAllByEventId(long eventId, Pageable pageable);
-
-   // Pageable pageable = PageRequest.of(from > 0 ? from / size : 0, size, Sort.by("id").ascending());
 }

@@ -117,7 +117,7 @@ public class PublicApiServiceImpl implements PublicApiService {
         Event event = eventRepository.findById(id).orElseThrow(() ->
                 new NotFoundException(String.format("Event not found %d", id)));
         if (!event.getState().equals(State.PUBLISHED)) {
-            throw new NotFoundException(String.format("Even must be published %d", id));
+            throw new NotFoundException(String.format("Event must be published %d", id));
         }
         List<Request> confirmedRequests = requestRepository
                 .findAllByEventIdAndStatusOrderById(id, RequestStatus.CONFIRMED);
@@ -171,7 +171,7 @@ public class PublicApiServiceImpl implements PublicApiService {
     public List<CommentDto> getComments(Long eventId, int from, int size) {
         eventRepository.findById(eventId).orElseThrow(() ->
                 new NotFoundException(String.format("Event not found %d", eventId)));
-        Pageable pageable = PageRequest.of(from > 0 ? from / size : 0, size, Sort.by("start").descending());
+        Pageable pageable = PageRequest.of(from > 0 ? from / size : 0, size, Sort.by("created").descending());
         List<Comment> comments = commentRepository.findAllByEventId(eventId, pageable);
         if (comments.isEmpty()) {
             return Collections.emptyList();
