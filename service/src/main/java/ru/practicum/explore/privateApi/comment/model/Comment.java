@@ -27,6 +27,10 @@ public class Comment {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime created;
 
+    @Column(name = "updated")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime updated;
+
     @ManyToOne
     @JoinColumn(name = "event_id")
     private Event event;

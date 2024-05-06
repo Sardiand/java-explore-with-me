@@ -35,7 +35,7 @@ public class CommentServiceImpl implements CommentService {
         User user = setUser(userId);
         Event event = setEvent(eventId);
         return mapper.toCommentDto(commentRepository.save(mapper
-                .toComment(dto, LocalDateTime.now(), event, user)));
+                .toComment(dto, LocalDateTime.now(), LocalDateTime.now(), event, user)));
     }
 
     @Override
@@ -44,7 +44,7 @@ public class CommentServiceImpl implements CommentService {
         Comment comment = setComment(commentId);
         checkPermission(userId, comment);
         comment.setText(dto.getText());
-        comment.setCreated(LocalDateTime.now());
+        comment.setUpdated(LocalDateTime.now());
         return mapper.toCommentDto(commentRepository.save(comment));
     }
 
@@ -58,7 +58,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<CommentDto> getAllByUserId(Long userId, int from, int size) {
-        Pageable pageable = PageRequest.of(from > 0 ? from / size : 0, size, Sort.by("created").descending());
+        Pageable pageable = PageRequest.of(from > 0 ? from / size : 0, size, Sort.by("updated").descending());
         List<Comment> comments = commentRepository.findAllByAuthorId(userId, pageable);
         if (comments.isEmpty()) {
             return Collections.emptyList();

@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 import ru.practicum.explore.admin.category.model.Category;
 import ru.practicum.explore.admin.category.repository.CategoryRepository;
 import ru.practicum.explore.admin.event.dto.AdminStateAction;
@@ -24,6 +25,7 @@ import ru.practicum.explore.privateApi.event.model.State;
 import ru.practicum.explore.privateApi.event.repository.EventRepository;
 import ru.practicum.explore.privateApi.event.repository.LocationRepository;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -36,6 +38,7 @@ import static ru.practicum.explore.specification.EventSpec.filterForAdmin;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
+@Validated
 public class AdminEventServiceImpl implements AdminEventService {
     private final EventRepository eventRepository;
     private final CategoryRepository categoryRepository;
@@ -75,7 +78,7 @@ public class AdminEventServiceImpl implements AdminEventService {
     }
 
     @Override
-    public List<EventDto> getAll(SearchingParams params, Integer from, Integer size) {
+    public List<EventDto> getAll(@Valid SearchingParams params, Integer from, Integer size) {
 
         Pageable pageable = PageRequest.of(from, size, Sort.by("id"));
         Specification<Event> specs = filterForAdmin(params);

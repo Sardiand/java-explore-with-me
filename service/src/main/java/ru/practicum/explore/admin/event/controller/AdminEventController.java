@@ -2,6 +2,7 @@ package ru.practicum.explore.admin.event.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.explore.admin.event.dto.AdminUpdateEventDto;
 import ru.practicum.explore.admin.event.parametrs.SearchingParams;
@@ -10,13 +11,13 @@ import ru.practicum.explore.privateApi.event.dto.EventDto;
 import ru.practicum.explore.privateApi.event.model.State;
 
 import javax.validation.Valid;
-import java.security.InvalidParameterException;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/admin/events")
+@Validated
 public class AdminEventController {
     private final AdminEventService service;
 
@@ -33,9 +34,6 @@ public class AdminEventController {
                                     @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeEnd,
                                     @RequestParam(defaultValue = "0") Integer from,
                                     @RequestParam(defaultValue = "10") Integer size) {
-        if (rangeEnd != null && rangeStart != null && rangeEnd.isBefore(rangeStart)) {
-            throw new InvalidParameterException("Date range is invalid");
-        }
         return service.getAll(new SearchingParams(users, states, categories, rangeStart, rangeEnd), from, size);
     }
 }

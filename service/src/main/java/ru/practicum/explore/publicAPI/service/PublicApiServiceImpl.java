@@ -171,7 +171,7 @@ public class PublicApiServiceImpl implements PublicApiService {
     public List<CommentDto> getComments(Long eventId, int from, int size) {
         eventRepository.findById(eventId).orElseThrow(() ->
                 new NotFoundException(String.format("Event not found %d", eventId)));
-        Pageable pageable = PageRequest.of(from > 0 ? from / size : 0, size, Sort.by("created").descending());
+        Pageable pageable = PageRequest.of(from > 0 ? from / size : 0, size, Sort.by("updated").descending());
         List<Comment> comments = commentRepository.findAllByEventId(eventId, pageable);
         if (comments.isEmpty()) {
             return Collections.emptyList();
