@@ -2,6 +2,7 @@ package ru.practicum.explore.publicAPI.service;
 
 import ru.practicum.explore.admin.category.dto.OutCategoryDto;
 import ru.practicum.explore.admin.compilation.dto.CompilationDto;
+import ru.practicum.explore.privateApi.comment.dto.CommentDto;
 import ru.practicum.explore.privateApi.event.dto.EventDto;
 import ru.practicum.explore.privateApi.event.dto.ShortEventDto;
 import ru.practicum.explore.publicAPI.event.EventSearchingParams;
@@ -21,4 +22,6 @@ public interface PublicApiService {
     EventDto getEventById(Long id, HttpServletRequest request);
 
     List<ShortEventDto> getEvents(EventSearchingParams params, Integer from, Integer size, HttpServletRequest request);
+
+    List<CommentDto> getComments(Long eventId, int from, int size);
 }

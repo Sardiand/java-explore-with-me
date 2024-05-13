@@ -1,0 +1,3105 @@
+{
+	"info": {
+		"_postman_id": "3ac3013b-93c7-4660-83fa-530756d79220",
+		"name": "feature",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "26821331"
+	},
+	"item": [
+		{
+			"name": "Private",
+			"item": [
+				{
+					"name": "Comment create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 201\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields id, text, created, updated, eventId, authorId\", function () {\r",
+									"    pm.expect(target).to.have.property('id');\r",
+									"    pm.expect(target).to.have.property('text');\r",
+									"    pm.expect(target).to.have.property('created');\r",
+									"    pm.expect(target).to.have.property('updated');\r",
+									"    pm.expect(target).to.have.property('eventId');\r",
+									"    pm.expect(target).to.have.property('authorId');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'id' should be equal '1'\", function () {\r",
+									"    pm.expect(target.id).equal(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'text' should be equal 'The best event ever!' \", function () {\r",
+									"    pm.expect(target.text).equal(\"The best event ever!\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'eventId' should be equal '1'\", function () {\r",
+									"    pm.expect(target.eventId).equal(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'authorId' should be equal '3'\", function () {\r",
+									"    pm.expect(target.authorId).equal(3);\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Comment update\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"connection": true,
+							"accept-encoding": true,
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\":\"The best event ever!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments?event=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "event",
+									"value": "1"
+								}
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "3",
+									"uuid": "bb8b7b4b-6065-44f4-967a-6045fc825797"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Comment update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 201\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields id, text, created, updated, eventId, authorId\", function () {\r",
+									"    pm.expect(target).to.have.property('id');\r",
+									"    pm.expect(target).to.have.property('text');\r",
+									"    pm.expect(target).to.have.property('created');\r",
+									"    pm.expect(target).to.have.property('updated');\r",
+									"    pm.expect(target).to.have.property('eventId');\r",
+									"    pm.expect(target).to.have.property('authorId');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'id' should be equal '1'\", function () {\r",
+									"    pm.expect(target.id).equal(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'text' should be equal 'Not so cool as I thought.' \", function () {\r",
+									"    pm.expect(target.text).equal(\"Not so cool as I thought.\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'eventId' should be equal '1'\", function () {\r",
+									"    pm.expect(target.eventId).equal(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'authorId' should be equal '3'\", function () {\r",
+									"    pm.expect(target.authorId).equal(3);\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Comment get by author\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\":\"Not so cool as I thought.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "3",
+									"uuid": "a4b229ef-668e-43cd-b0ad-9d02d80b68b6"
+								},
+								{
+									"key": "commentId",
+									"value": "1",
+									"uuid": "7e2396a0-32b1-4082-bdac-f46e49aebf9d"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Comment get by author",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 201\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields id, text, created, updated, eventId, authorId\", function () {\r",
+									"    pm.expect(target).to.have.property('id');\r",
+									"    pm.expect(target).to.have.property('text');\r",
+									"    pm.expect(target).to.have.property('created');\r",
+									"    pm.expect(target).to.have.property('updated');\r",
+									"    pm.expect(target).to.have.property('eventId');\r",
+									"    pm.expect(target).to.have.property('authorId');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'id' should be equal '1'\", function () {\r",
+									"    pm.expect(target.id).equal(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'text' should be equal 'Not so cool as I thought.' \", function () {\r",
+									"    pm.expect(target.text).equal(\"Not so cool as I thought.\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'eventId' should be equal '1'\", function () {\r",
+									"    pm.expect(target.eventId).equal(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'authorId' should be equal '3'\", function () {\r",
+									"    pm.expect(target.authorId).equal(3);\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Comment get by another user\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "3",
+									"uuid": "cb475788-34af-47aa-8a16-a8748d3e2ec4"
+								},
+								{
+									"key": "commentId",
+									"value": "1",
+									"uuid": "fb5f2ae2-5164-45a8-af00-9da717f3d96b"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Comment get by another user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 403 or 409\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([403, 409]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields message, reason, status, timestamp\", function () {\r",
+									"    pm.expect(target).to.have.property('message');\r",
+									"    pm.expect(target).to.have.property('reason');\r",
+									"    pm.expect(target).to.have.property('status');\r",
+									"    pm.expect(target).to.have.property('timestamp');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'message' should be equal 'User with id 1 isn't author of comment 1'\", function () {\r",
+									"    pm.expect(target.message).equal(\"User with id 1 isn't author of comment 1\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'reason' should be equal 'Insufficient rights to perform this operation.' \",\r",
+									" function () {\r",
+									"    pm.expect(target.reason).equal(\"Insufficient rights to perform this operation.\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'status' should be equal 'FORBIDDEN'\", function () {\r",
+									"    pm.expect(target.status).equal(\"FORBIDDEN\");\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Comment get by wrong user\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1",
+									"uuid": "e5edf1d8-da0b-469a-a047-b74aafde4cfc"
+								},
+								{
+									"key": "commentId",
+									"value": "1",
+									"uuid": "9c1d7a59-6b3b-46dc-bc29-8bdec7e52324"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Comment get by wrong user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400 or 404\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([400, 404]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields message, reason, status, timestamp\", function () {\r",
+									"    pm.expect(target).to.have.property('message');\r",
+									"    pm.expect(target).to.have.property('reason');\r",
+									"    pm.expect(target).to.have.property('status');\r",
+									"    pm.expect(target).to.have.property('timestamp');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'message' should be equal 'User not found 991'\", function () {\r",
+									"    pm.expect(target.message).equal(\"User not found 991\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'reason' should be equal 'The required object was not found.' \",\r",
+									" function () {\r",
+									"    pm.expect(target.reason).equal(\"The required object was not found.\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'status' should be equal 'NOT_FOUND'\", function () {\r",
+									"    pm.expect(target.status).equal(\"NOT_FOUND\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.execution.setNextRequest(\"Comment create 2\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "991",
+									"uuid": "4d3041d9-ab79-4237-8e8d-f24d9b5e78f3"
+								},
+								{
+									"key": "commentId",
+									"value": "1",
+									"uuid": "bb65b473-8074-44c7-8fd2-22b900477095"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Comment create 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 201\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields id, text, created, updated, eventId, authorId\", function () {\r",
+									"    pm.expect(target).to.have.property('id');\r",
+									"    pm.expect(target).to.have.property('text');\r",
+									"    pm.expect(target).to.have.property('created');\r",
+									"    pm.expect(target).to.have.property('updated');\r",
+									"    pm.expect(target).to.have.property('eventId');\r",
+									"    pm.expect(target).to.have.property('authorId');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'id' should be equal '2'\", function () {\r",
+									"    pm.expect(target.id).equal(2);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'text' should be equal 'This is so tEsty.' \", function () {\r",
+									"    pm.expect(target.text).equal(\"This is so tEsty.\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'eventId' should be equal '2'\", function () {\r",
+									"    pm.expect(target.eventId).equal(2);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'authorId' should be equal '3'\", function () {\r",
+									"    pm.expect(target.authorId).equal(3);\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Comment create 3\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\":\"This is so tEsty.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments?event=2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "event",
+									"value": "2"
+								}
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "3",
+									"uuid": "29b43696-3130-4def-a07a-9b4c2f8365a2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Comment create 3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 201\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields id, text, created, updated, eventId, authorId\", function () {\r",
+									"    pm.expect(target).to.have.property('id');\r",
+									"    pm.expect(target).to.have.property('text');\r",
+									"    pm.expect(target).to.have.property('created');\r",
+									"    pm.expect(target).to.have.property('updated');\r",
+									"    pm.expect(target).to.have.property('eventId');\r",
+									"    pm.expect(target).to.have.property('authorId');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'id' should be equal '3'\", function () {\r",
+									"    pm.expect(target.id).equal(3);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'text' should be equal 'Some comment.' \", function () {\r",
+									"    pm.expect(target.text).equal(\"Some comment.\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'eventId' should be equal '1'\", function () {\r",
+									"    pm.expect(target.eventId).equal(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'authorId' should be equal '1'\", function () {\r",
+									"    pm.expect(target.authorId).equal(1);\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Get all comments by user withoutparams\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\":\"Some comment.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments?event=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "event",
+									"value": "1"
+								}
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1",
+									"uuid": "904dbfb8-c115-4fb4-b22f-61266caba753"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all comments by user withoutparams",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.be.ok;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Test list comments response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"    pm.expect(target.length, 'List length must be 2').to.eql(2);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.test(\"Test list[0] 'id' field\", function () {\r",
+									"    pm.expect(target[0]).to.have.property('id');\r",
+									"    pm.expect(target[0].id, '\"id\" must be 2').to.eql(2);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test list[0] 'text' field\", function () {\r",
+									"    pm.expect(target[0]).to.have.property('text');\r",
+									"    pm.expect(target[0].text, '\"text\" must be \"This is so tEsty.\"').to.eql(\"This is so tEsty.\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test list[0] 'eventId' field\", function () {\r",
+									"    pm.expect(target[0]).to.have.property('eventId');\r",
+									"    pm.expect(target[0].eventId, '\"eventId\" must be 2').to.eql(2);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test list[0] 'authorId' field\", function () {\r",
+									"    pm.expect(target[0]).to.have.property('authorId');\r",
+									"    pm.expect(target[0].authorId, '\"authorId\" must be 3').to.eql(3);\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Get all comments by user with params\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "3",
+									"uuid": "dfc21f6e-5bc6-49ec-8396-5375899d6682"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all comments by user with params",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.be.ok;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Test list comments response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"    pm.expect(target.length, 'List length must be 1').to.eql(1);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.test(\"Test list[0] 'id' field\", function () {\r",
+									"    pm.expect(target[0]).to.have.property('id');\r",
+									"    pm.expect(target[0].id, '\"id\" must be 2').to.eql(2);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test list[0] 'text' field\", function () {\r",
+									"    pm.expect(target[0]).to.have.property('text');\r",
+									"    pm.expect(target[0].text, '\"text\" must be \"This is so tEsty.\"').to.eql(\"This is so tEsty.\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test list[0] 'eventId' field\", function () {\r",
+									"    pm.expect(target[0]).to.have.property('eventId');\r",
+									"    pm.expect(target[0].eventId, '\"eventId\" must be 2').to.eql(2);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test list[0] 'authorId' field\", function () {\r",
+									"    pm.expect(target[0]).to.have.property('authorId');\r",
+									"    pm.expect(target[0].authorId, '\"authorId\" must be 3').to.eql(3);\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Delete comment with wrong user\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments?from=0&size=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "1"
+								}
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "3",
+									"uuid": "6e22c82a-faf6-42de-9484-7ea79ab4fcec"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete comment with wrong user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.execution.setNextRequest(\"Delete comment 2 by user\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 403 or 409\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([403, 409]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields message, reason, status, timestamp\", function () {\r",
+									"    pm.expect(target).to.have.property('message');\r",
+									"    pm.expect(target).to.have.property('reason');\r",
+									"    pm.expect(target).to.have.property('status');\r",
+									"    pm.expect(target).to.have.property('timestamp');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'message' should be equal 'User with id 2 isn't author of comment 1'\", function () {\r",
+									"    pm.expect(target.message).equal(\"User with id 2 isn't author of comment 1\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'reason' should be equal 'Insufficient rights to perform this operation.' \",\r",
+									" function () {\r",
+									"    pm.expect(target.reason).equal(\"Insufficient rights to perform this operation.\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'status' should be equal 'FORBIDDEN'\", function () {\r",
+									"    pm.expect(target.status).equal(\"FORBIDDEN\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "2",
+									"uuid": "fc3527dc-c4c9-4bc3-abb8-fda099e4893d"
+								},
+								{
+									"key": "commentId",
+									"value": "1",
+									"uuid": "36eea127-8b8c-4fca-a181-fe4cf57c1a8f"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete comment 2 by user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.execution.setNextRequest(\"Get comments to event without params\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 204\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,204]);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "3",
+									"uuid": "aada97d2-f17f-4363-8dfc-66ca3bce4d59"
+								},
+								{
+									"key": "commentId",
+									"value": "2",
+									"uuid": "68ef5bad-e2da-4588-9a61-d4425da20cdd"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create comment with wrong event",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400 or 404\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([400, 404]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields message, reason, status, timestamp\", function () {\r",
+									"    pm.expect(target).to.have.property('message');\r",
+									"    pm.expect(target).to.have.property('reason');\r",
+									"    pm.expect(target).to.have.property('status');\r",
+									"    pm.expect(target).to.have.property('timestamp');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'message' should be equal 'Event not found 128'\", function () {\r",
+									"    pm.expect(target.message).equal(\"Event not found 128\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'reason' should be equal 'The required object was not found.' \",\r",
+									" function () {\r",
+									"    pm.expect(target.reason).equal(\"The required object was not found.\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'status' should be equal 'NOT_FOUND'\", function () {\r",
+									"    pm.expect(target.status).equal(\"NOT_FOUND\");\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Create comment with wrong user\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\":\"bad comment\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments?event=128",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "event",
+									"value": "128"
+								}
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1",
+									"uuid": "8f8d9a40-510c-4359-a0eb-5c0e00e87d7c"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create comment with wrong user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400 or 404\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([400, 404]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields message, reason, status, timestamp\", function () {\r",
+									"    pm.expect(target).to.have.property('message');\r",
+									"    pm.expect(target).to.have.property('reason');\r",
+									"    pm.expect(target).to.have.property('status');\r",
+									"    pm.expect(target).to.have.property('timestamp');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'message' should be equal 'User not found 256'\", function () {\r",
+									"    pm.expect(target.message).equal(\"User not found 256\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'reason' should be equal 'The required object was not found.' \",\r",
+									" function () {\r",
+									"    pm.expect(target.reason).equal(\"The required object was not found.\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'status' should be equal 'NOT_FOUND'\", function () {\r",
+									"    pm.expect(target.status).equal(\"NOT_FOUND\");\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Update comment with wrong id\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\":\"bad comment\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments?event=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "event",
+									"value": "1"
+								}
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "256",
+									"uuid": "0ab4b880-652e-463c-b357-19234c6af743"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update comment with wrong id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400 or 404\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([400, 404]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields message, reason, status, timestamp\", function () {\r",
+									"    pm.expect(target).to.have.property('message');\r",
+									"    pm.expect(target).to.have.property('reason');\r",
+									"    pm.expect(target).to.have.property('status');\r",
+									"    pm.expect(target).to.have.property('timestamp');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'message' should be equal 'Comment not found 158'\", function () {\r",
+									"    pm.expect(target.message).equal(\"Comment not found 158\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'reason' should be equal 'The required object was not found.' \",\r",
+									" function () {\r",
+									"    pm.expect(target.reason).equal(\"The required object was not found.\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'status' should be equal 'NOT_FOUND'\", function () {\r",
+									"    pm.expect(target.status).equal(\"NOT_FOUND\");\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Delete with wrong user\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\":\"bad comment\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1",
+									"uuid": "6ab8cb8c-0214-4eaa-b9ad-5e02c42bcd7f"
+								},
+								{
+									"key": "commentId",
+									"value": "158",
+									"uuid": "ecb46ca2-7797-497b-96e1-db8a9c085468"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete with wrong user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400 or 404\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([400, 404]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields message, reason, status, timestamp\", function () {\r",
+									"    pm.expect(target).to.have.property('message');\r",
+									"    pm.expect(target).to.have.property('reason');\r",
+									"    pm.expect(target).to.have.property('status');\r",
+									"    pm.expect(target).to.have.property('timestamp');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'message' should be equal 'User not found 1155'\", function () {\r",
+									"    pm.expect(target.message).equal(\"User not found 1155\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'reason' should be equal 'The required object was not found.' \",\r",
+									" function () {\r",
+									"    pm.expect(target.reason).equal(\"The required object was not found.\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'status' should be equal 'NOT_FOUND'\", function () {\r",
+									"    pm.expect(target.status).equal(\"NOT_FOUND\");\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Delete with wrong comment\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1155",
+									"uuid": "f5aa57b8-9781-40ea-b4a3-d91f32ee30fc"
+								},
+								{
+									"key": "commentId",
+									"value": "1",
+									"uuid": "dcf74099-e839-481f-a8dc-83b0b98f75cb"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete with wrong comment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400 or 404\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([400, 404]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields message, reason, status, timestamp\", function () {\r",
+									"    pm.expect(target).to.have.property('message');\r",
+									"    pm.expect(target).to.have.property('reason');\r",
+									"    pm.expect(target).to.have.property('status');\r",
+									"    pm.expect(target).to.have.property('timestamp');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'message' should be equal 'Comment not found 128'\", function () {\r",
+									"    pm.expect(target.message).equal(\"Comment not found 128\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'reason' should be equal 'The required object was not found.' \",\r",
+									" function () {\r",
+									"    pm.expect(target.reason).equal(\"The required object was not found.\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'status' should be equal 'NOT_FOUND'\", function () {\r",
+									"    pm.expect(target.status).equal(\"NOT_FOUND\");\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Update comment with wrong user\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1",
+									"uuid": "38af0a98-8fb6-46c2-a07b-c091c859333e"
+								},
+								{
+									"key": "commentId",
+									"value": "128",
+									"uuid": "54a2be08-ec70-45bf-a492-70e325e0bcfa"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update comment with wrong user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400 or 404\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([400, 404]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields message, reason, status, timestamp\", function () {\r",
+									"    pm.expect(target).to.have.property('message');\r",
+									"    pm.expect(target).to.have.property('reason');\r",
+									"    pm.expect(target).to.have.property('status');\r",
+									"    pm.expect(target).to.have.property('timestamp');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'message' should be equal 'User not found 189'\", function () {\r",
+									"    pm.expect(target.message).equal(\"User not found 189\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'reason' should be equal 'The required object was not found.' \",\r",
+									" function () {\r",
+									"    pm.expect(target.reason).equal(\"The required object was not found.\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'status' should be equal 'NOT_FOUND'\", function () {\r",
+									"    pm.expect(target.status).equal(\"NOT_FOUND\");\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Get comment with not exist user\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\":\"bad comment\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "189",
+									"uuid": "fd498b36-9c33-41b3-871b-2128495c89a2"
+								},
+								{
+									"key": "commentId",
+									"value": "1",
+									"uuid": "4d31b7d3-d2b3-42a5-97d8-e65c181ea954"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get comment with not exist user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400 or 404\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([400, 404]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields message, reason, status, timestamp\", function () {\r",
+									"    pm.expect(target).to.have.property('message');\r",
+									"    pm.expect(target).to.have.property('reason');\r",
+									"    pm.expect(target).to.have.property('status');\r",
+									"    pm.expect(target).to.have.property('timestamp');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'message' should be equal 'User not found 189'\", function () {\r",
+									"    pm.expect(target.message).equal(\"User not found 189\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'reason' should be equal 'The required object was not found.' \",\r",
+									" function () {\r",
+									"    pm.expect(target.reason).equal(\"The required object was not found.\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'status' should be equal 'NOT_FOUND'\", function () {\r",
+									"    pm.expect(target.status).equal(\"NOT_FOUND\");\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Get wrong comment\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "189",
+									"uuid": "149b1b13-36fe-40b8-a809-f4d07045cc3b"
+								},
+								{
+									"key": "commentId",
+									"value": "1",
+									"uuid": "e81862a3-6ebe-46ea-98ab-99395468af72"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get wrong comment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400 or 404\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([400, 404]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields message, reason, status, timestamp\", function () {\r",
+									"    pm.expect(target).to.have.property('message');\r",
+									"    pm.expect(target).to.have.property('reason');\r",
+									"    pm.expect(target).to.have.property('status');\r",
+									"    pm.expect(target).to.have.property('timestamp');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'message' should be equal 'Comment not found 189'\", function () {\r",
+									"    pm.expect(target.message).equal(\"Comment not found 189\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'reason' should be equal 'The required object was not found.' \",\r",
+									" function () {\r",
+									"    pm.expect(target.reason).equal(\"The required object was not found.\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'status' should be equal 'NOT_FOUND'\", function () {\r",
+									"    pm.expect(target.status).equal(\"NOT_FOUND\");\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Get comments to event without params\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1",
+									"uuid": "ace71585-e13b-4bd2-88eb-9b55f62e6523"
+								},
+								{
+									"key": "commentId",
+									"value": "189",
+									"uuid": "611fcc78-c1b8-43ed-94d5-0cc79f1b1955"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Public",
+			"item": [
+				{
+					"name": "Get comments to event without params",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.be.ok;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Test list comments response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"    pm.expect(target.length, 'List length must be 2').to.eql(2);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.test(\"Test list[0] 'id' field\", function () {\r",
+									"    pm.expect(target[0]).to.have.property('id');\r",
+									"    pm.expect(target[0].id, '\"id\" must be 3').to.eql(3);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test list[0] 'text' field\", function () {\r",
+									"    pm.expect(target[0]).to.have.property('text');\r",
+									"    pm.expect(target[0].text, '\"text\" must be \"Some comment.\"').to.eql(\"Some comment.\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test list[0] 'eventId' field\", function () {\r",
+									"    pm.expect(target[0]).to.have.property('eventId');\r",
+									"    pm.expect(target[0].eventId, '\"eventId\" must be 1').to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test list[0] 'authorId' field\", function () {\r",
+									"    pm.expect(target[0]).to.have.property('authorId');\r",
+									"    pm.expect(target[0].authorId, '\"authorId\" must be 1').to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Get comments to event with params\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/events/:eventId/comments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"events",
+								":eventId",
+								"comments"
+							],
+							"variable": [
+								{
+									"key": "eventId",
+									"value": "1",
+									"uuid": "956c8f19-2208-4d60-8ffe-29f753936a63"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get comments to event with params",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.be.ok;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Test list comments response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"    pm.expect(target.length, 'List length must be 1').to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test list[0] 'id' field\", function () {\r",
+									"    pm.expect(target[0]).to.have.property('id');\r",
+									"    pm.expect(target[0].id, '\"id\" must be 3').to.eql(3);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test list[0] 'text' field\", function () {\r",
+									"    pm.expect(target[0]).to.have.property('text');\r",
+									"    pm.expect(target[0].text, '\"text\" must be \"Some comment.\"').to.eql(\"Some comment.\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test list[0] 'eventId' field\", function () {\r",
+									"    pm.expect(target[0]).to.have.property('eventId');\r",
+									"    pm.expect(target[0].eventId, '\"eventId\" must be 1').to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test list[0] 'authorId' field\", function () {\r",
+									"    pm.expect(target[0]).to.have.property('authorId');\r",
+									"    pm.expect(target[0].authorId, '\"authorId\" must be 1').to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Comment create with empty body\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/events/:eventId/comments?from=0&size=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"events",
+								":eventId",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "1"
+								}
+							],
+							"variable": [
+								{
+									"key": "eventId",
+									"value": "1",
+									"uuid": "ab81aff1-e2da-447b-8381-6772c59f4e2a"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Validation",
+			"item": [
+				{
+					"name": "Comment create with empty body",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.be.badRequest;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields timestamp, status, error, path\", function () {\r",
+									"    pm.expect(target).to.have.property('timestamp');\r",
+									"    pm.expect(target).to.have.property('status');\r",
+									"    pm.expect(target).to.have.property('error');\r",
+									"    pm.expect(target).to.have.property('path');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'status' should be equal '400'\", function () {\r",
+									"    pm.expect(target.status).equal(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'error' should be equal 'Bad Request'\", function () {\r",
+									"    pm.expect(target.error).equal(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Update with empty body\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments?event=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "event",
+									"value": "1"
+								}
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1",
+									"uuid": "58151a35-aa6f-4c92-803a-bb97f35b7a27"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update with empty body",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.be.badRequest;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields timestamp, status, error, path\", function () {\r",
+									"    pm.expect(target).to.have.property('timestamp');\r",
+									"    pm.expect(target).to.have.property('status');\r",
+									"    pm.expect(target).to.have.property('error');\r",
+									"    pm.expect(target).to.have.property('path');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'status' should be equal '400'\", function () {\r",
+									"    pm.expect(target.status).equal(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'error' should be equal 'Bad Request'\", function () {\r",
+									"    pm.expect(target.error).equal(\"Bad Request\");\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Create comment with blank body\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "3",
+									"uuid": "76d1aafb-cb46-4925-a8ad-ff414c8f5806"
+								},
+								{
+									"key": "commentId",
+									"value": "1",
+									"uuid": "a9f89e41-e49d-4974-ba30-ae6ab727dc3b"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create comment with blank body",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400 or 409\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([400, 409]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields message, reason, status, timestamp\", function () {\r",
+									"    pm.expect(target).to.have.property('message');\r",
+									"    pm.expect(target).to.have.property('reason');\r",
+									"    pm.expect(target).to.have.property('status');\r",
+									"    pm.expect(target).to.have.property('timestamp');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'message' should be equal 'text must not be blank'\", function () {\r",
+									"    pm.expect(target.message).equal(\"text must not be blank\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'reason' should be equal 'Argument in request body isn't valid.' \",\r",
+									" function () {\r",
+									"    pm.expect(target.reason).equal(\"Argument in request body isn't valid.\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'status' should be equal 'BAD_REQUEST'\", function () {\r",
+									"    pm.expect(target.status).equal(\"BAD_REQUEST\");\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Create comment with wrong userId\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\":\"     \"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments?event=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "event",
+									"value": "1"
+								}
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1",
+									"uuid": "9bad4feb-5bbd-44de-85ce-e13c88a40893"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create comment with wrong userId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400 or 409\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([400, 409]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields message, reason, status, timestamp\", function () {\r",
+									"    pm.expect(target).to.have.property('message');\r",
+									"    pm.expect(target).to.have.property('reason');\r",
+									"    pm.expect(target).to.have.property('status');\r",
+									"    pm.expect(target).to.have.property('timestamp');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'message' should be equal 'addComment.userId: must be greater than 0'\", function () {\r",
+									"    pm.expect(target.message).equal(\"addComment.userId: must be greater than 0\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'reason' should be equal 'Argument in request body isn't valid.' \",\r",
+									" function () {\r",
+									"    pm.expect(target.reason).equal(\"Argument in request isn't valid.\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'status' should be equal 'BAD_REQUEST'\", function () {\r",
+									"    pm.expect(target.status).equal(\"BAD_REQUEST\");\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Get comments to event with wrong params\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\":\"bad comment\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments?event=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "event",
+									"value": "1"
+								}
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "-3",
+									"uuid": "94e1128f-bf06-42e5-804b-02038ba0080f"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get comments to event with wrong params",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400 or 409\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([400, 409]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields message, reason, status, timestamp\", function () {\r",
+									"    pm.expect(target).to.have.property('message');\r",
+									"    pm.expect(target).to.have.property('reason');\r",
+									"    pm.expect(target).to.have.property('status');\r",
+									"    pm.expect(target).to.have.property('timestamp');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'message' should be equal 'getCommentsForEvent.from: must be greater than or equal to 0'\", function () {\r",
+									"    pm.expect(target.message).equal(\"getCommentsForEvent.from: must be greater than or equal to 0\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'reason' should be equal 'Argument in request body isn't valid.' \",\r",
+									" function () {\r",
+									"    pm.expect(target.reason).equal(\"Argument in request isn't valid.\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'status' should be equal 'BAD_REQUEST'\", function () {\r",
+									"    pm.expect(target.status).equal(\"BAD_REQUEST\");\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Update comment with wrong userId\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/events/:eventId/comments?from=-1&size=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"events",
+								":eventId",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "-1"
+								},
+								{
+									"key": "size",
+									"value": "1"
+								}
+							],
+							"variable": [
+								{
+									"key": "eventId",
+									"value": "1",
+									"uuid": "afd06399-1b0e-4da8-b221-616917747074"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update comment with wrong userId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400 or 409\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([400, 409]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields message, reason, status, timestamp\", function () {\r",
+									"    pm.expect(target).to.have.property('message');\r",
+									"    pm.expect(target).to.have.property('reason');\r",
+									"    pm.expect(target).to.have.property('status');\r",
+									"    pm.expect(target).to.have.property('timestamp');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'message' should be equal 'updateComment.userId: must be greater than 0'\", function () {\r",
+									"    pm.expect(target.message).equal(\"updateComment.userId: must be greater than 0\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'reason' should be equal 'Argument in request body isn't valid.' \",\r",
+									" function () {\r",
+									"    pm.expect(target.reason).equal(\"Argument in request isn't valid.\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'status' should be equal 'BAD_REQUEST'\", function () {\r",
+									"    pm.expect(target.status).equal(\"BAD_REQUEST\");\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Update comment with wrong commentId\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\":\"bad comment\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "-1",
+									"uuid": "f100f811-496e-4f8b-9a2f-da9e24712e27"
+								},
+								{
+									"key": "commentId",
+									"value": "1",
+									"uuid": "f744d3b3-51cf-41e2-a523-fbc697c49501"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update comment with wrong commentId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400 or 409\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([400, 409]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields message, reason, status, timestamp\", function () {\r",
+									"    pm.expect(target).to.have.property('message');\r",
+									"    pm.expect(target).to.have.property('reason');\r",
+									"    pm.expect(target).to.have.property('status');\r",
+									"    pm.expect(target).to.have.property('timestamp');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'message' should be equal 'updateComment.commentId: must be greater than 0'\", function () {\r",
+									"    pm.expect(target.message).equal(\"updateComment.commentId: must be greater than 0\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'reason' should be equal 'Argument in request body isn't valid.' \",\r",
+									" function () {\r",
+									"    pm.expect(target.reason).equal(\"Argument in request isn't valid.\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'status' should be equal 'BAD_REQUEST'\", function () {\r",
+									"    pm.expect(target.status).equal(\"BAD_REQUEST\");\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Delete comment by user with wrong userId\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\":\"bad comment\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1",
+									"uuid": "9a9ede60-eede-476a-932e-cd17f32e02b0"
+								},
+								{
+									"key": "commentId",
+									"value": "-1",
+									"uuid": "12f9b57c-b223-449b-afde-f4d35b7478ca"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete comment by user with wrong userId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400 or 409\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([400, 409]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields message, reason, status, timestamp\", function () {\r",
+									"    pm.expect(target).to.have.property('message');\r",
+									"    pm.expect(target).to.have.property('reason');\r",
+									"    pm.expect(target).to.have.property('status');\r",
+									"    pm.expect(target).to.have.property('timestamp');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'message' should be equal 'deleteComment.userId: must be greater than 0'\", function () {\r",
+									"    pm.expect(target.message).equal(\"deleteComment.userId: must be greater than 0\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'reason' should be equal 'Argument in request body isn't valid.' \",\r",
+									" function () {\r",
+									"    pm.expect(target.reason).equal(\"Argument in request isn't valid.\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'status' should be equal 'BAD_REQUEST'\", function () {\r",
+									"    pm.expect(target.status).equal(\"BAD_REQUEST\");\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Delete comment by user with wrong commentId\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "-1",
+									"uuid": "4d98bcb4-8501-4adc-a3f4-bf0cfe7df740"
+								},
+								{
+									"key": "commentId",
+									"value": "1",
+									"uuid": "569a90a3-5a8f-42f2-858b-36f7bf216bc0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete comment by user with wrong commentId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400 or 409\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([400, 409]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields message, reason, status, timestamp\", function () {\r",
+									"    pm.expect(target).to.have.property('message');\r",
+									"    pm.expect(target).to.have.property('reason');\r",
+									"    pm.expect(target).to.have.property('status');\r",
+									"    pm.expect(target).to.have.property('timestamp');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'message' should be equal 'deleteComment.commentId: must be greater than 0'\", function () {\r",
+									"    pm.expect(target.message).equal(\"deleteComment.commentId: must be greater than 0\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'reason' should be equal 'Argument in request body isn't valid.' \",\r",
+									" function () {\r",
+									"    pm.expect(target.reason).equal(\"Argument in request isn't valid.\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'status' should be equal 'BAD_REQUEST'\", function () {\r",
+									"    pm.expect(target.status).equal(\"BAD_REQUEST\");\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Update comment with blank body\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1",
+									"uuid": "cb6ad818-cba6-4a5a-a120-2cc4f9803e36"
+								},
+								{
+									"key": "commentId",
+									"value": "0",
+									"uuid": "2dadd7cd-61f5-465e-9492-35c8cd4239f3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update comment with blank body",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400 or 409\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([400, 409]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields message, reason, status, timestamp\", function () {\r",
+									"    pm.expect(target).to.have.property('message');\r",
+									"    pm.expect(target).to.have.property('reason');\r",
+									"    pm.expect(target).to.have.property('status');\r",
+									"    pm.expect(target).to.have.property('timestamp');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'message' should be equal 'text must not be blank'\", function () {\r",
+									"    pm.expect(target.message).equal(\"text must not be blank\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'reason' should be equal 'Argument in request body isn't valid.' \",\r",
+									" function () {\r",
+									"    pm.expect(target.reason).equal(\"Argument in request body isn't valid.\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'status' should be equal 'BAD_REQUEST'\", function () {\r",
+									"    pm.expect(target.status).equal(\"BAD_REQUEST\");\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Get comments by user with wrong userId\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\":\"     \"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1",
+									"uuid": "43b44420-1d1f-4b62-838c-fdafcca66bf9"
+								},
+								{
+									"key": "commentId",
+									"value": "1",
+									"uuid": "bb03613e-3089-49a1-b281-787695c27f7b"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get comments by user with wrong userId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400 or 409\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([400, 409]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields message, reason, status, timestamp\", function () {\r",
+									"    pm.expect(target).to.have.property('message');\r",
+									"    pm.expect(target).to.have.property('reason');\r",
+									"    pm.expect(target).to.have.property('status');\r",
+									"    pm.expect(target).to.have.property('timestamp');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'message' should be equal 'getUsersComments.userId: must be greater than 0'\", function () {\r",
+									"    pm.expect(target.message).equal(\"getUsersComments.userId: must be greater than 0\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'reason' should be equal 'Argument in request body isn't valid.' \",\r",
+									" function () {\r",
+									"    pm.expect(target.reason).equal(\"Argument in request isn't valid.\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'status' should be equal 'BAD_REQUEST'\", function () {\r",
+									"    pm.expect(target.status).equal(\"BAD_REQUEST\");\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Get comment by user with wrong userId\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "0",
+									"uuid": "45ed2cf6-8175-4b97-be5a-922b4308cc61"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get comment by user with wrong userId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400 or 409\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([400, 409]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields message, reason, status, timestamp\", function () {\r",
+									"    pm.expect(target).to.have.property('message');\r",
+									"    pm.expect(target).to.have.property('reason');\r",
+									"    pm.expect(target).to.have.property('status');\r",
+									"    pm.expect(target).to.have.property('timestamp');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'message' should be equal 'getCommentById.userId: must be greater than 0'\", function () {\r",
+									"    pm.expect(target.message).equal(\"getCommentById.userId: must be greater than 0\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'reason' should be equal 'Argument in request body isn't valid.' \",\r",
+									" function () {\r",
+									"    pm.expect(target.reason).equal(\"Argument in request isn't valid.\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'status' should be equal 'BAD_REQUEST'\", function () {\r",
+									"    pm.expect(target.status).equal(\"BAD_REQUEST\");\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Get comment by user with wrong commentId\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "0",
+									"uuid": "a8551b25-9197-4f37-ae45-5495bf2bf703"
+								},
+								{
+									"key": "commentId",
+									"value": "1",
+									"uuid": "c22f3726-92bb-4a1d-ac76-4e54741af6d5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get comment by user with wrong commentId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400 or 409\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([400, 409]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields message, reason, status, timestamp\", function () {\r",
+									"    pm.expect(target).to.have.property('message');\r",
+									"    pm.expect(target).to.have.property('reason');\r",
+									"    pm.expect(target).to.have.property('status');\r",
+									"    pm.expect(target).to.have.property('timestamp');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'message' should be equal 'getCommentById.commentId: must be greater than 0'\", function () {\r",
+									"    pm.expect(target.message).equal(\"getCommentById.commentId: must be greater than 0\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'reason' should be equal 'Argument in request body isn't valid.' \",\r",
+									" function () {\r",
+									"    pm.expect(target.reason).equal(\"Argument in request isn't valid.\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'status' should be equal 'BAD_REQUEST'\", function () {\r",
+									"    pm.expect(target.status).equal(\"BAD_REQUEST\");\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Get all user comments with wrong params\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1",
+									"uuid": "3481fad2-00d2-4e2b-8d3c-cc2ec92f61be"
+								},
+								{
+									"key": "commentId",
+									"value": "0",
+									"uuid": "887e1648-53ef-4299-a0e2-2775a1e4c84d"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all user comments with wrong params",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400 or 409\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([400, 409]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields message, reason, status, timestamp\", function () {\r",
+									"    pm.expect(target).to.have.property('message');\r",
+									"    pm.expect(target).to.have.property('reason');\r",
+									"    pm.expect(target).to.have.property('status');\r",
+									"    pm.expect(target).to.have.property('timestamp');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'message' should be equal 'getUsersComments.size: must be greater than 0'\", function () {\r",
+									"    pm.expect(target.message).equal(\"getUsersComments.size: must be greater than 0\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'reason' should be equal 'Argument in request body isn't valid.' \",\r",
+									" function () {\r",
+									"    pm.expect(target.reason).equal(\"Argument in request isn't valid.\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'status' should be equal 'BAD_REQUEST'\", function () {\r",
+									"    pm.expect(target.status).equal(\"BAD_REQUEST\");\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Delete comment by admin with wrong commentId\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId/comments?from=0&size=-1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "-1"
+								}
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1",
+									"uuid": "0513c38d-0206-471e-8c37-f2093a27500f"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete comment by admin with wrong commentId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400 or 409\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([400, 409]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields message, reason, status, timestamp\", function () {\r",
+									"    pm.expect(target).to.have.property('message');\r",
+									"    pm.expect(target).to.have.property('reason');\r",
+									"    pm.expect(target).to.have.property('status');\r",
+									"    pm.expect(target).to.have.property('timestamp');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'message' should be equal 'delete.commentId: must be greater than 0'\", function () {\r",
+									"    pm.expect(target.message).equal(\"delete.commentId: must be greater than 0\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'reason' should be equal 'Argument in request body isn't valid.' \",\r",
+									" function () {\r",
+									"    pm.expect(target.reason).equal(\"Argument in request isn't valid.\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'status' should be equal 'BAD_REQUEST'\", function () {\r",
+									"    pm.expect(target.status).equal(\"BAD_REQUEST\");\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Delete comment by admin with wrong comment\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/admin/comments/:commentId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "commentId",
+									"value": "-1",
+									"uuid": "f95623ba-3fb9-4e75-94ae-9d5c3234ff97"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Delete comment by admin with wrong comment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400 or 404\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([400, 404]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Has response\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Comment should have fields message, reason, status, timestamp\", function () {\r",
+									"    pm.expect(target).to.have.property('message');\r",
+									"    pm.expect(target).to.have.property('reason');\r",
+									"    pm.expect(target).to.have.property('status');\r",
+									"    pm.expect(target).to.have.property('timestamp');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'message' should be equal 'Comment not found 189'\", function () {\r",
+									"    pm.expect(target.message).equal(\"Comment not found 189\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'reason' should be equal 'The required object was not found.' \",\r",
+									" function () {\r",
+									"    pm.expect(target.reason).equal(\"The required object was not found.\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response field 'status' should be equal 'NOT_FOUND'\", function () {\r",
+									"    pm.expect(target.status).equal(\"NOT_FOUND\");\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(\"Delete comment by admin\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/admin/comments/:commentId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "commentId",
+									"value": "189",
+									"uuid": "3166b815-537e-4874-bc46-d4346dc0c5b4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete comment by admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 204\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,204]);\r",
+									"});\r",
+									"\r",
+									"pm.execution.setNextRequest(null);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/admin/comments/:commentId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "commentId",
+									"value": "1",
+									"uuid": "552043aa-58cb-4975-8626-7fb6c1aa6388"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080"
+		}
+	]
+}
